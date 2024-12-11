@@ -30,7 +30,6 @@ def get_balance_info():
         balance = data.get("balance")
         active_farm = data.get("activeFarmingStartedAt")
         print("Balance: " + str(balance))
-        print("Active Farming Started At: " + str(active_farm))
     except requests.RequestException as error:
         print("Error getting farming info:", error)
 
@@ -105,8 +104,10 @@ def claim_task():
         print("Error processing tasks:", error)
 
 if __name__ == "__main__":
-    get_balance_info()
-    finish_farming()
-    claim_task()
-    print("\nWaiting 1 hour before starting again...")
-    time.sleep(60 * 60)
+    while True:
+        get_balance_info()
+        finish_farming()
+        claim_task()
+        print("\nWaiting 1 hour before starting again...")
+        get_balance_info()
+        time.sleep(60 * 60)
